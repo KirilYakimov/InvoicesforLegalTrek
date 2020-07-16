@@ -18,12 +18,11 @@ class CreateInvoicesTable extends Migration
             $table->foreignId('client_id')->references('id')->on('users');
             $table->text('matter');
             $table->foreignId('issuer_id')->references('id')->on('users');
-            $table->string('currency');
-            //$table->enum('currency', ['euro', 'us dollar']);
+            $table->foreignId('currency_id')->references('id')->on('currencies');
             $table->bigInteger('invoice_no');
             $table->date('issuing_date');
             $table->text('description');
-            $table->decimal('price', 8, 2);
+            $table->decimal('price', 9, 2);
             $table->timestamps();
         });
     }

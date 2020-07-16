@@ -43,6 +43,10 @@
                         <!-- Authentication Links -->
                         @guest
                         <li class="nav-item">
+                            <a class="nav-link" href="{{ route('invoice') }}">{{ __('Create invoice') }}</a>
+                        </li>
+                        
+                        <li class="nav-item">
                             <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                         </li>
                         @if (Route::has('register'))
@@ -79,6 +83,20 @@
         </nav>
 
         <main class="py-4">
+            <div class="container">
+                @if(Session::has('success'))
+                <div class="alert alert-success text-center" role="alert">
+                    {{ Session::get('success') }}
+                </div>
+                @endif
+
+                @if(Session::has('error'))
+                <div class="alert alert-danger text-center" role="alert">
+                    {{ Session::get('error') }}
+                </div>
+                @endif
+            </div>
+
             @yield('content')
         </main>
     </div>
