@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Currency;
 use App\User;
 use App\Invoice;
 use Illuminate\Http\Request;
@@ -17,7 +18,8 @@ class InvoiceController extends Controller
     {
         $issuers = User::where('issuer', '=', true)->get();
         $clients = User::where('issuer', '=', false)->get();
-        return view('invoice', compact('issuers', 'clients'));
+        $currencies = Currency::all();
+        return view('invoice', compact('issuers', 'clients', 'currencies'));
     }
 
     /**
@@ -28,27 +30,31 @@ class InvoiceController extends Controller
      */
     public function store(Request $request)
     {
-        //'client_id' => ['required'],
-        //'matter' => ['required', 'string'],
-        //'issuer_id' => ['required'],
-        //'currency' => ['required'],
-        //'invoice_no' => ['required', 'integer'],
-        //'issuing_date' => ['required', 'date'],
-        //'description' => ['required', 'string'],
-        //'price' => ['reqired', 'between:1,1000000']
+       $validatedData = $request->validate([
+            'client_id' => ['required'],
+            'matter' => ['required', 'string'],
+            'issuer_id' => ['required'],
+            'currency_id' => ['required'],
+            'invoice_no' => ['required', 'integer'],
+            'issuing_date' => ['required', 'date'],
+            'description' => ['required', 'string'],
+            'price' => ['required', 'numeric', 'between:1,1000000']
+        ]);
 
-        Invoice::create([
+        $date = date_format(date_create($request['issuing_date']), 'Y-m-d');
+        $invoice = new Invoice([
             'client_id' => $request['client_id'],
             'matter' => $request['matter'],
             'issuer_id' => $request['issuer_id'],
-            'currency' => $request['currency'],
+            'currency_id' => $request['currency_id'],
             'invoice_no' => $request['invoice_no'],
-            'issuing_date' => $request['issuing_date'],
+            'issuing_date' => $date,
             'description' => $request['description'],
             'price' => $request['price']
         ]);
+        $invoice->save();
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Invoice created!');
     }
 
     /**

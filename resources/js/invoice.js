@@ -8,19 +8,16 @@ $(document).ready(function () {
     });
 
     //Updates the matter text on the invoice when the user tipes in the input feld on with id matter
-    $("#matter").keypress(function () {
+    $('#matter').on('input propertychange paste', function() {
         $("#matterText").html(
             $("#matter").val()
         );
 
-
-    });
-    $("#matter").change(function () {
         let isStringEmpty = $("#matter").val();
         if (!isStringEmpty.trim()) {
             $("#matterText").html("Please enter a matter.");
         }
-    })
+    });
 
     //Addes the datepicker
     $("#date").datepicker({
@@ -29,8 +26,14 @@ $(document).ready(function () {
         autoclose: true,
         todayHighlight: true,
     });
+
     //Clears the form
-    $("#cleareForm").click(function() {
-         $("#invoiceForm")[0].reset();
+    $("#cleareForm").click(function () {
+        $("#invoiceForm")[0].reset();
     });
+
+    // alert for updating posting
+    setTimeout(function () {
+        $(".alert").slideUp(1000);
+    }, 4000);
 });

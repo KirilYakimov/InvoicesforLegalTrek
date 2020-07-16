@@ -12,7 +12,7 @@ class Invoice extends Model
      * @var array
      */
     protected $fillable = [
-        'client_id', 'matter', 'issuer_id', 'currency', 'invoice_no', 'issuing_date', 'description', 'price'
+        'client_id', 'matter', 'issuer_id', 'currency_id', 'invoice_no', 'issuing_date', 'description', 'price'
     ];
 
     public function clients()
@@ -23,5 +23,10 @@ class Invoice extends Model
     public function issuers()
     {
         return $this->belongsToMany(User::class, "issuers_id");
+    }
+
+    public function currency()
+    {
+        return $this->hasOne(Currency::class, "currency_id");
     }
 }
