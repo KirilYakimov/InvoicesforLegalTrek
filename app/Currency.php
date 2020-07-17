@@ -12,6 +12,6 @@ class Currency extends Model
 
     public function invoices()
     {
-        return $this->belongsToMany(Invoice::class, "currency");
+        return $this->hasMany(Invoice::class);
     }
 }
