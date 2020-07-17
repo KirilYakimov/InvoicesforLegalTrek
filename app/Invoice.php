@@ -15,18 +15,18 @@ class Invoice extends Model
         'client_id', 'matter', 'issuer_id', 'currency_id', 'invoice_no', 'issuing_date', 'description', 'price'
     ];
 
-    public function client()
+    public function clients()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsToMany(User::class, "clients_id");
     }
 
-    public function issuer()
+    public function issuers()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsToMany(User::class, "issuers_id");
     }
 
     public function currency()
     {
-        return $this->belongsTo(Currency::class);
+        return $this->hasOne(Currency::class, "currency_id");
     }
 }

@@ -22,3 +22,5 @@ Auth::routes();
 
 Route::get('/invoice', 'InvoiceController@index')->name('invoice');
 Route::post('/invoice', 'InvoiceController@store')->name('invoice.store');
+Route::get('/test', 'testController@index')->name('test');
+Route::post('/test', 'testController@store')->name('test.store');
