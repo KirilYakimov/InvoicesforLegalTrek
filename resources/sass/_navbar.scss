@@ -1,0 +1,31 @@
+.navbar,
+.navbar-brand {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.navbar .navbar-brand img {
+    height: 50px;
+}
+
+.dropdown-toggle::after {
+    display: none;
+}
+
+.dropdown-toggle {
+    color: white;
+}
+
+.dropdown-toggle,
+.nav-link {
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.nav-link {
+    color: white;
+}
+
+.nav-link:hover {
+    color: greenyellow;
+}
