@@ -23,7 +23,6 @@ class CreateInvoicesTable extends Migration
             $table->date('issuing_date');
             $table->text('description');
             $table->decimal('price', 9, 2);
-            $table->text('file_location');
             $table->timestamps();
         });
     }

@@ -5,7 +5,6 @@
  */
 
 require('./bootstrap');
-require('./navbar');
 require('./invoice');
 
 window.Vue = require('vue');
